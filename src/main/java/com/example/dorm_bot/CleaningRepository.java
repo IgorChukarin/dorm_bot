@@ -11,6 +11,8 @@ import java.util.List;
 public class CleaningRepository {
     private final String bucket = "\uD83E\uDEA3";
     private final String sponge = "\uD83E\uDDFD";
+    private final String list = "\uD83D\uDCDD";
+
     private final List<String> NAMES = new ArrayList<>(List.of("Pierpaolo", "Igor", "Kasra", "Arvin", "Andrea"));
     private static final List<int[]> PAIRS = List.of(
             new int[]{0, 1},
@@ -30,8 +32,8 @@ public class CleaningRepository {
                 "\n" + NAMES.get(pair[1]) + " - Friday";
     }
 
-    public List<String> getAllCleaners() {
-        return NAMES;
+    public String getAllCleaners() {
+        return list + "Cleaning order" + list + "\n\n" + String.join("\n", NAMES);
     }
 
 }

@@ -25,13 +25,14 @@ public class Bot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             String userMessage = update.getMessage().getText();
             if (userMessage.equals("/cleanorder")) {
-                String message = "Cleaning order:\n" + String.join("\n", cleaningRepository.getAllCleaners());
+                String message = cleaningRepository.getAllCleaners();
                 sendMessage(message, update.getMessage().getChatId());
             } else if (userMessage.equals("/cleanthisweek")) {
                 String message = cleaningRepository.getCurrentWeekCleaners();
                 sendMessage(message, update.getMessage().getChatId());
             } else {
-
+                String message = "E che cazzo!";
+                sendMessage(message, update.getMessage().getChatId());
             }
         }
     }
