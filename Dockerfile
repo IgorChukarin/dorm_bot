@@ -3,6 +3,6 @@ COPY . .
 RUN gradle clean build -x test
 
 FROM amazoncorretto:17-alpine
-COPY --from=build /build/libs/dorm_bot-0.0.1-SNAPSHOT-plain.jar demo.jar
+COPY --from=build /home/gradle/project/build/libs/dorm_bot-0.0.1-SNAPSHOT-plain.jar demo.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "demo.jar"]
