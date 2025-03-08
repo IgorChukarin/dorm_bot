@@ -13,9 +13,16 @@ public class DormBotApplication {
 
 	public static void main(String[] args) {
 
-		Dotenv dotenv = Dotenv.load();
-		System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
-		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
+//		local usage
+
+//		Dotenv dotenv = Dotenv.load();
+//		System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
+//		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
+
+		String botToken = System.getenv("TELEGRAM_BOT_TOKEN");
+		String botUsername = System.getenv("TELEGRAM_BOT_USERNAME");
+		System.setProperty("TELEGRAM_BOT_TOKEN", botToken);
+		System.setProperty("TELEGRAM_BOT_USERNAME", botUsername);
 
 		SpringApplication.run(DormBotApplication.class, args);
 	}
