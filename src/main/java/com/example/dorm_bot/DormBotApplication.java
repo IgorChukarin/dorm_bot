@@ -24,6 +24,9 @@ public class DormBotApplication {
 		System.setProperty("TELEGRAM_BOT_TOKEN", botToken);
 		System.setProperty("TELEGRAM_BOT_USERNAME", botUsername);
 
+		System.out.println("TELEGRAM_BOT_TOKEN: " + System.getenv("TELEGRAM_BOT_TOKEN"));
+		System.out.println("TELEGRAM_BOT_USERNAME: " + System.getenv("TELEGRAM_BOT_USERNAME"));
+
 		SpringApplication.run(DormBotApplication.class, args);
 	}
 
