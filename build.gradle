@@ -30,12 +30,14 @@ tasks.named('test') {
 
 jar {
 	manifest {
+		duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
 		attributes(
 				'Main-Class': 'com.example.dorm_bot.DormBotApplication'
 		)
 	}
-}
 
-bootJar {
-	mainClass = 'com.example.dorm_bot.DormBotApplication'
+	from {
+		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+	}
 }
