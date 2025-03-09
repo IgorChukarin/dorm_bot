@@ -9,23 +9,21 @@ import org.springframework.context.annotation.PropertySource;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @SpringBootApplication
 public class DormBotApplication {
 
 	public static void main(String[] args) {
+		SpringApplication app = new SpringApplication(DormBotApplication.class);
 
-//		local usage
+		Map<String, Object> properties = new HashMap<>();
+		properties.put("bot.token", System.getenv("TELEGRAM_BOT_TOKEN"));
+		properties.put("bot.username", System.getenv("TELEGRAM_BOT_USERNAME"));
 
-		Dotenv dotenv = Dotenv.load();
-		System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
-		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
-
-//		String botToken = System.getenv("TELEGRAM_BOT_TOKEN");
-//		String botUsername = System.getenv("TELEGRAM_BOT_USERNAME");
-//		System.setProperty("TELEGRAM_BOT_TOKEN", botToken);
-//		System.setProperty("TELEGRAM_BOT_USERNAME", botUsername);
-
-		SpringApplication.run(DormBotApplication.class, args);
+		app.setDefaultProperties(properties);
+		app.run(args);
 	}
 
 	@Bean
