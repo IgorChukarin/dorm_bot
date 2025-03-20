@@ -1,11 +1,15 @@
 package com.example.dorm_bot;
 
+import com.example.dorm_bot.service.Command;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.List;
 
 @Component
 public class Bot extends TelegramLongPollingBot {
@@ -13,44 +17,36 @@ public class Bot extends TelegramLongPollingBot {
     @Value("${bot.username}")
     private String botUsername;
 
-    private final CleaningRepository cleaningRepository;
+    private final List<Command> commands;
 
-    public Bot(@Value("${bot.token}") String token, CleaningRepository cleaningRepository) {
+    public Bot(@Value("${bot.token}") String token, List<Command> commands) {
         super(token);
-        this.cleaningRepository = cleaningRepository;
+        this.commands = commands;
     }
 
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            String userMessage = update.getMessage().getText();
-            String command = userMessage.substring(0, userMessage.indexOf("@"));
-            if (command.equals("/cleanorder")) {
-                String message = cleaningRepository.getAllCleaners();
-                sendMessage(message, update.getMessage().getChatId());
-            } else if (command.equals("/cleanthisweek")) {
-                String message = cleaningRepository.getCurrentWeekCleaners();
-                sendMessage(message, update.getMessage().getChatId());
-            } else {
-                String message = "E che cazzo!";
-                sendMessage(message, update.getMessage().getChatId());
-            }
+        if (update.hasMessage()) {
+            commands.stream()
+                    .filter(command -> command.isApplicable(update))
+                    .findFirst()
+                    .ifPresent( command -> {
+                        Message message = update.getMessage();
+                        String answer = command.process(update, this);
+                        SendMessage response = new SendMessage();
+                        response.setChatId(message.getChatId().toString());
+                        response.setText(answer);
+                        try {
+                            execute(response);
+                        } catch (TelegramApiException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
         }
     }
 
     @Override
     public String getBotUsername() {
         return botUsername;
-    }
-
-    public void sendMessage(String message, Long chatId) {
-        SendMessage newMessage = new SendMessage();
-        newMessage.setChatId(chatId);
-        newMessage.setText(message);
-        try {
-            execute(newMessage);
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
