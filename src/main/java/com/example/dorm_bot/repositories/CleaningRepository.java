@@ -1,4 +1,4 @@
-package com.example.dorm_bot;
+package com.example.dorm_bot.repositories;
 
 import org.springframework.stereotype.Repository;
 

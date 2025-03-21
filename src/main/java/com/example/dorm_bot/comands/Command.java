@@ -1,4 +1,4 @@
-package com.example.dorm_bot.service;
+package com.example.dorm_bot.comands;
 
 import com.example.dorm_bot.Bot;
 import org.telegram.telegrambots.meta.api.objects.Update;

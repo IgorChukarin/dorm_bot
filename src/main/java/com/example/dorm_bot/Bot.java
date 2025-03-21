@@ -1,6 +1,6 @@
 package com.example.dorm_bot;
 
-import com.example.dorm_bot.service.Command;
+import com.example.dorm_bot.comands.Command;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;

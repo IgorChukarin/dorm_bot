@@ -1,28 +1,28 @@
-package com.example.dorm_bot.service;
+package com.example.dorm_bot.comands;
 
 import com.example.dorm_bot.Bot;
-import com.example.dorm_bot.CleaningRepository;
+import com.example.dorm_bot.repositories.CleaningRepository;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
-public class CleanThisWeekCommand extends Command{
+public class CleanOrderCommand extends Command{
 
     CleaningRepository cleaningRepository;
 
-    public CleanThisWeekCommand(CleaningRepository cleaningRepository) {
+    public CleanOrderCommand(CleaningRepository cleaningRepository) {
         this.cleaningRepository = cleaningRepository;
     }
 
     @Override
     public boolean isApplicable(Update update) {
         Message message = update.getMessage();
-        return message.hasText() && message.getText().startsWith("/cleanthisweek");
+        return message.hasText() && message.getText().startsWith("/cleanorder");
     }
 
     @Override
     public String process(Update update, Bot bot) {
-        return cleaningRepository.getCurrentWeekCleaners();
+        return cleaningRepository.getAllCleaners();
     }
 }
