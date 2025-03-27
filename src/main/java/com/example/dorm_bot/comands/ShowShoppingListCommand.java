@@ -28,7 +28,7 @@ public class ShowShoppingListCommand extends Command{
         List<String> products = productRepository.getAllProducts();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < products.size(); i++) {
-            sb.append(i + 1).append(". ").append("dio ").append(products.get(i)).append("\n");
+            sb.append(i + 1).append(". ").append(products.get(i)).append("\n");
         }
         String productsColumn = sb.toString().trim();
         return "This is what you have to buy:\n" + productsColumn;
