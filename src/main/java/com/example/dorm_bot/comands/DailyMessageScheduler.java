@@ -89,6 +89,3 @@ public class DailyMessageScheduler {
                 "You have to buy it!";
     }
 }
-
-// add db
-// we have to buy command change

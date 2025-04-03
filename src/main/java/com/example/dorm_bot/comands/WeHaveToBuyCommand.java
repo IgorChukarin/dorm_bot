@@ -32,7 +32,7 @@ public class WeHaveToBuyCommand extends Command{
                     "\n3. Send command and the product separated by space" +
                     "\nOr copy-paste this: /wehavetobuy glubshitto";
         } else {
-            String product = command.split(" ")[1];
+            String product = command.substring(command.indexOf(" "));
             productRepository.addProduct(product);
             return product.concat(" added").concat(" to the list!");
         }

@@ -42,3 +42,7 @@ public class DormBotApplication {
 		};
 	}
 }
+
+// TODO:
+// add db
+// we have to buy command change
