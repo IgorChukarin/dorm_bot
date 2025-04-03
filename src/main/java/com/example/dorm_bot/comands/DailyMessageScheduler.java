@@ -38,9 +38,11 @@ public class DailyMessageScheduler {
         Runnable task = () -> {
             List<String> products = productRepository.getAllProducts();
             if (products.isEmpty()) {
+                System.out.println("nothing to print!");
                 return;
             }
             try {
+                System.out.println("something to print!");
                 SendMessage response = new SendMessage();
                 String messageText = generateMessageText();
                 response.setChatId(chatId);
@@ -51,16 +53,17 @@ public class DailyMessageScheduler {
             }
         };
         long initialDelay = computeInitialDelay();
-        scheduler.scheduleAtFixedRate(task, initialDelay, 1, TimeUnit.DAYS);
+        scheduler.scheduleAtFixedRate(task, initialDelay, TimeUnit.DAYS.toMinutes(1), TimeUnit.MINUTES);
     }
 
 
     private long computeInitialDelay() {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime nextRun = now.withHour(8).withMinute(0);
+        LocalDateTime nextRun = now.withHour(14).withMinute(45).withSecond(0);
         if (now.isAfter(nextRun)) {
             nextRun = nextRun.plusDays(1);
         }
+        System.out.println(Duration.between(now, nextRun).toMinutes());
         return Duration.between(now, nextRun).toMinutes();
     }
 
@@ -70,7 +73,7 @@ public class DailyMessageScheduler {
     }
 
     private String generateMessageText() {
-        String startPhrase = startPhrases.get(getRandomNumberInRange(0,startPhrases.size()));
+        String startPhrase = startPhrases.get(getRandomNumberInRange(0,startPhrases.size() - 1));
         List<String> products = productRepository.getAllProducts();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < products.size(); i++) {
@@ -87,5 +90,5 @@ public class DailyMessageScheduler {
     }
 }
 
-// tag someone random
-// counter
+// add db
+// we have to buy command change
