@@ -13,8 +13,16 @@ public class ProductRepository {
         productList.add(product);
     }
 
-    public void deleteProduct(int id) {
+    public void deleteProductById(int id) {
         productList.remove(id - 1);
+    }
+
+    public boolean removeProductByName(String name) {
+        if (productList.contains(name)) {
+            productList.remove(name);
+            return true;
+        } else
+            return false;
     }
 
     public List<String> getAllProducts() {
