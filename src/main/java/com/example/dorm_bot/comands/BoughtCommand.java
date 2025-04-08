@@ -22,41 +22,39 @@ public class BoughtCommand extends Command{
     @Override
     public boolean isApplicable(Update update) {
         Message message = update.getMessage();
-        return message.hasText() && message.getText().startsWith("/bought") ||
-                !message.getText().startsWith("/") && awaitingInput.size() > 0 ||
-                message.hasText() && message.getText().startsWith("/wedontneed");
+        String messageText = message.getText();
+
+        boolean messageHasText = !messageText.isBlank();
+        boolean isBoughtCommand = messageText.startsWith("/bought");
+        boolean isWeDontneedCommand = messageText.startsWith("/wedontneed");
+        boolean messageIsInput = !messageText.startsWith("/") && awaitingInput.size() > 0;
+
+        return messageHasText && (isBoughtCommand || isWeDontneedCommand || messageIsInput);
     }
 
     @Override
     public String process(Update update, Bot bot) {
         Message message = update.getMessage();
+        String messageText = message.getText();
         Long chatId = message.getChatId();
-        String command = message.getText();
 
-        if (command.equals("/bought") || command.equals("/bought@DormAmicoBot")) {
-            awaitingInput.add(chatId);
-            return "Allora, stronzo!\nWhat did you buy?";
-        }
-
-        if (command.equals("/wedontneed") || command.equals("/wedontneed@DormAmicoBot")) {
+        if (messageText.startsWith("/bought") || messageText.startsWith("/wedontneed")) {
             awaitingInput.add(chatId);
             return "Allora, stronzo!\nWhat should i remove?";
         }
 
         if (awaitingInput.contains(chatId)) {
             awaitingInput.remove(chatId);
-            if (productRepository.removeProductByName(command.toUpperCase())) {
-                return command.concat(" removed from list!");
-            }
-            else {
-                return command.concat(" is not on the list!\nPorco dio!");
-            }
+            boolean isRemoved = productRepository.removeProductByName(messageText.toUpperCase());
+            return getRemovalResponse(isRemoved, messageText.toUpperCase());
         }
 
-        else {
-            int id = Integer.parseInt(command.split(" ")[1]);
-            productRepository.deleteProductById(id);
-            return "product removed from list";
-        }
+        return null;
+    }
+
+    private String getRemovalResponse(boolean isRemoved, String messageText) {
+        return isRemoved
+                ? messageText.concat(" removed from list!")
+                : messageText.concat(" is not on the list!\nPorco dio!");
     }
 }
