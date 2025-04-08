@@ -16,22 +16,22 @@ import java.util.Map;
 public class DormBotApplication {
 
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(DormBotApplication.class);
-		Dotenv dotenv = Dotenv.load();
-		System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
-		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
-		Map<String, Object> properties = new HashMap<>();
-		properties.put("bot.token", System.getenv("TELEGRAM_BOT_TOKEN"));
-		properties.put("bot.username", System.getenv("TELEGRAM_BOT_USERNAME"));
-		app.setDefaultProperties(properties);
-		app.run(args);
-
 //		SpringApplication app = new SpringApplication(DormBotApplication.class);
+//		Dotenv dotenv = Dotenv.load();
+//		System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
+//		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
 //		Map<String, Object> properties = new HashMap<>();
 //		properties.put("bot.token", System.getenv("TELEGRAM_BOT_TOKEN"));
 //		properties.put("bot.username", System.getenv("TELEGRAM_BOT_USERNAME"));
 //		app.setDefaultProperties(properties);
 //		app.run(args);
+
+		SpringApplication app = new SpringApplication(DormBotApplication.class);
+		Map<String, Object> properties = new HashMap<>();
+		properties.put("bot.token", System.getenv("TELEGRAM_BOT_TOKEN"));
+		properties.put("bot.username", System.getenv("TELEGRAM_BOT_USERNAME"));
+		app.setDefaultProperties(properties);
+		app.run(args);
 	}
 
 	@Bean
