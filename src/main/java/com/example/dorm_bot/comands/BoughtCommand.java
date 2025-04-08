@@ -22,7 +22,9 @@ public class BoughtCommand extends Command{
     @Override
     public boolean isApplicable(Update update) {
         Message message = update.getMessage();
-        return message.hasText() && message.getText().startsWith("/bought") || !message.getText().startsWith("/") && awaitingInput.size() > 0;
+        return message.hasText() && message.getText().startsWith("/bought") ||
+                !message.getText().startsWith("/") && awaitingInput.size() > 0 ||
+                message.hasText() && message.getText().startsWith("/wedontneed");
     }
 
     @Override
@@ -34,6 +36,11 @@ public class BoughtCommand extends Command{
         if (command.equals("/bought") || command.equals("/bought@DormAmicoBot")) {
             awaitingInput.add(chatId);
             return "Allora, stronzo!\nWhat did you buy?";
+        }
+
+        if (command.equals("/wedontneed") || command.equals("/wedontneed@DormAmicoBot")) {
+            awaitingInput.add(chatId);
+            return "Allora, stronzo!\nWhat should i remove?";
         }
 
         if (awaitingInput.contains(chatId)) {

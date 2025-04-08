@@ -46,7 +46,7 @@ public class DormBotApplication {
 // TODO:
 // add db
 // connect redis for consumables
-// we don't need command
-// add bestemias in database
+// add bot phrases in database
+
 // multiple products in one message
 // bug if person didn't send anything
