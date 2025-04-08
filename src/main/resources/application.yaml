@@ -1,3 +1,15 @@
 bot:
   token: ${TELEGRAM_BOT_TOKEN}
   username: ${TELEGRAM_BOT_USERNAME}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dormdb
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+jpa:
+  hibernate:
+    ddl-auto: update
+  show-sql: true

@@ -20,9 +20,14 @@ public class DormBotApplication {
 		Dotenv dotenv = Dotenv.load();
 		System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
 		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
+		System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
+		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+
 		Map<String, Object> properties = new HashMap<>();
 		properties.put("bot.token", System.getenv("TELEGRAM_BOT_TOKEN"));
 		properties.put("bot.username", System.getenv("TELEGRAM_BOT_USERNAME"));
+		properties.put("spring.datasource.username", System.getenv("DB_USERNAME"));
+		properties.put("spring.datasource.password", System.getenv("DB_PASSWORD"));
 		app.setDefaultProperties(properties);
 		app.run(args);
 
@@ -44,7 +49,6 @@ public class DormBotApplication {
 }
 
 // TODO:
-// connect redis for consumables
 // add bot phrases in database and birthday
 // sometimes it display that list is empty
 // birthday list function
@@ -53,3 +57,4 @@ public class DormBotApplication {
 // multiple products in one message
 // bug if person didn't send anything
 // tests
+// take the logic out of repository

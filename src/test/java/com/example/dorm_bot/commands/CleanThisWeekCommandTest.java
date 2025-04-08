@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -33,6 +34,22 @@ public class CleanThisWeekCommandTest {
         when(message.getText()).thenReturn("/cleanthisweek");
 
         assertTrue(cleanThisWeekCommand.isApplicable(update));
+    }
+
+    @Test
+    void isApplicable_shouldReturnFalse_whenMessageIsDifferent() {
+        Update update = mock(Update.class);
+        Message message = mock(Message.class);
+
+        when(update.getMessage()).thenReturn(message);
+        when(message.hasText()).thenReturn(true);
+        when(message.getText()).thenReturn("different message");
+
+        assertFalse(cleanThisWeekCommand.isApplicable(update));
+    }
+
+    @Test
+    void process_shouldReturnCurrentWeekCleaners() {
 
     }
 }
