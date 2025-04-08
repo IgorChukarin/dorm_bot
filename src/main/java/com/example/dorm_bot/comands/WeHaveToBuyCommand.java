@@ -37,7 +37,7 @@ public class WeHaveToBuyCommand extends Command{
 
         if (awaitingInput.contains(chatId)) {
             awaitingInput.remove(chatId);
-            productRepository.addProduct(command);
+            productRepository.addProduct(command.toUpperCase());
             return command.concat(" added to the list!");
         }
 

@@ -26,6 +26,9 @@ public class ShowShoppingListCommand extends Command{
     @Override
     public String process(Update update, Bot bot) {
         List<String> products = productRepository.getAllProducts();
+        if (products.isEmpty()) {
+            return "A-ma-zing! There is nothing to buy!";
+        }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < products.size(); i++) {
             sb.append(i + 1).append(". ").append(products.get(i)).append("\n");

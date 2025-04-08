@@ -38,7 +38,7 @@ public class BoughtCommand extends Command{
 
         if (awaitingInput.contains(chatId)) {
             awaitingInput.remove(chatId);
-            if (productRepository.removeProductByName(command)) {
+            if (productRepository.removeProductByName(command.toUpperCase())) {
                 return command.concat(" removed from list!");
             }
             else {
