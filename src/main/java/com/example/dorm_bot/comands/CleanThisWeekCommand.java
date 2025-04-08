@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Component
 public class CleanThisWeekCommand extends Command{
 
-    CleaningRepository cleaningRepository;
+    private final CleaningRepository cleaningRepository;
 
     public CleanThisWeekCommand(CleaningRepository cleaningRepository) {
         this.cleaningRepository = cleaningRepository;
