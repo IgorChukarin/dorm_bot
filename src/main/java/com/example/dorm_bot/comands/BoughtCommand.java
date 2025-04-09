@@ -1,6 +1,7 @@
 package com.example.dorm_bot.comands;
 
 import com.example.dorm_bot.Bot;
+import com.example.dorm_bot.BotMessages;
 import com.example.dorm_bot.repositories.ProductRepository;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -40,7 +41,7 @@ public class BoughtCommand extends Command{
 
         if (messageText.startsWith("/bought") || messageText.startsWith("/wedontneed")) {
             awaitingInput.add(chatId);
-            return "Allora, stronzo!\nWhat should i remove?";
+            return BotMessages.REMOVE_PROMPT;
         }
 
         if (awaitingInput.contains(chatId)) {
@@ -52,9 +53,9 @@ public class BoughtCommand extends Command{
         return null;
     }
 
-    private String getRemovalResponse(boolean isRemoved, String messageText) {
+    private String getRemovalResponse(boolean isRemoved, String item) {
         return isRemoved
-                ? messageText.concat(" removed from list!")
-                : messageText.concat(" is not on the list!\nPorco dio!");
+                ? String.format(BotMessages.REMOVE_SUCCESS, item)
+                : String.format(BotMessages.REMOVE_FAILURE, item);
     }
 }
