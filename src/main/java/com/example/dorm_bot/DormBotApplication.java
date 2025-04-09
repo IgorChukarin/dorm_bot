@@ -50,9 +50,6 @@ public class DormBotApplication {
 
 // TODO:
 // add bot phrases in database and birthday
-// sometimes it display that list is empty
-// birthday list function
-
 // to uppercase everything
 // multiple products in one message
 // bug if person didn't send anything

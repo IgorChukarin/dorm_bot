@@ -1,4 +1,4 @@
-package com.example.dorm_bot.comands;
+package com.example.dorm_bot;
 
 import com.example.dorm_bot.Bot;
 import com.example.dorm_bot.repositories.ProductRepository;

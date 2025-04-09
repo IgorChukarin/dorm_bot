@@ -5,10 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.time.LocalDate;
-
 @Entity
-public class Dormmate {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
