@@ -21,6 +21,8 @@ public class DormBotApplication {
 		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
 		System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
 		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+		System.out.println("TELEGRAM_BOT_TOKEN: " + dotenv.get("TELEGRAM_BOT_TOKEN"));
+		System.out.println("DB_USERNAME: " + dotenv.get("DB_USERNAME"));
 		SpringApplication.run(DormBotApplication.class, args);
 	}
 }
