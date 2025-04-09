@@ -17,11 +17,13 @@ public class DormBotApplication {
 
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(DormBotApplication.class);
-		Dotenv dotenv = Dotenv.load();
-		System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
-		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
-		System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
-		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+
+
+//		Dotenv dotenv = Dotenv.load();
+//		System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
+//		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
+//		System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
+//		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
 
 		Map<String, Object> properties = new HashMap<>();
 		properties.put("bot.token", System.getenv("TELEGRAM_BOT_TOKEN"));
@@ -29,22 +31,9 @@ public class DormBotApplication {
 		properties.put("spring.datasource.username", System.getenv("DB_USERNAME"));
 		properties.put("spring.datasource.password", System.getenv("DB_PASSWORD"));
 		app.setDefaultProperties(properties);
+
+
 		app.run(args);
-
-//		SpringApplication app = new SpringApplication(DormBotApplication.class);
-//		Map<String, Object> properties = new HashMap<>();
-//		properties.put("bot.token", System.getenv("TELEGRAM_BOT_TOKEN"));
-//		properties.put("bot.username", System.getenv("TELEGRAM_BOT_USERNAME"));
-//		app.setDefaultProperties(properties);
-//		app.run(args);
-	}
-
-	@Bean
-	public CommandLineRunner commandLineRunner(Bot bot) {
-		return args -> {
-			TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-			telegramBotsApi.registerBot(bot);
-		};
 	}
 }
 
@@ -52,6 +41,6 @@ public class DormBotApplication {
 // add bot phrases in database and birthday
 // to uppercase everything
 // multiple products in one message
-// bug if person didn't send anything
+// bug if there is interception between methods
 // tests
-// take the logic out of repository
+// disload main class
