@@ -11,4 +11,7 @@ public class BotMessages {
 
     public static final String CLEANING_ORDER = LIST_EMOJI + "Cleaning order\n%s";
 
+    public static final String NOTHING_TO_BUY = "A-ma-zing! There is nothing to buy!";
+    public static final String HAVE_TO_BUY = "This is what you have to buy:\n%s";
+
 }

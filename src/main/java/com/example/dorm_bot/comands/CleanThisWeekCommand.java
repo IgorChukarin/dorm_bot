@@ -18,7 +18,12 @@ public class CleanThisWeekCommand extends Command{
     @Override
     public boolean isApplicable(Update update) {
         Message message = update.getMessage();
-        return message.hasText() && message.getText().startsWith("/cleanthisweek");
+        String messageText = message.getText();
+
+        boolean messageHasText = !messageText.isBlank();
+        boolean isCleanThisWeekCommand = messageText.startsWith("/cleanthisweek");
+
+        return messageHasText && isCleanThisWeekCommand;
     }
 
     @Override

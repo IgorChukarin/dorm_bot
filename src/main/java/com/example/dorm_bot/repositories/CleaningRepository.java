@@ -11,7 +11,6 @@ import java.util.List;
 public class CleaningRepository {
     private final String bucket = "\uD83E\uDEA3";
     private final String sponge = "\uD83E\uDDFD";
-    private final String list = "\uD83D\uDCDD";
 
     private final List<String> NAMES = new ArrayList<>(List.of("Pierpaolo", "Igor", "Kasra", "Arvin", "Andrea"));
     private static final List<int[]> PAIRS = List.of(
