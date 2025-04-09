@@ -27,10 +27,10 @@ public class BoughtCommand extends Command{
 
         boolean messageHasText = !messageText.isBlank();
         boolean isBoughtCommand = messageText.startsWith("/bought");
-        boolean isWeDontneedCommand = messageText.startsWith("/wedontneed");
+        boolean isWeDontNeedCommand = messageText.startsWith("/wedontneed");
         boolean messageIsInput = !messageText.startsWith("/") && awaitingInput.size() > 0;
 
-        return messageHasText && (isBoughtCommand || isWeDontneedCommand || messageIsInput);
+        return messageHasText && (isBoughtCommand || isWeDontNeedCommand || messageIsInput);
     }
 
     @Override

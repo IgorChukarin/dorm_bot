@@ -32,8 +32,8 @@ public class CleaningRepository {
                 "\n" + NAMES.get(pair[1]) + " - Friday";
     }
 
-    public String getAllCleaners() {
-        return list + "Cleaning order" + list + "\n\n" + String.join("\n", NAMES);
+    public List<String> getAllCleaners() {
+        return NAMES;
     }
 
 }
