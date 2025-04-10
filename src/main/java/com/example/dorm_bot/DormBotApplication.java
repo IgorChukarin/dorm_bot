@@ -11,17 +11,23 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 @SpringBootApplication
 public class DormBotApplication {
 
 	public static void main(String[] args) {
 		Dotenv dotenv = Dotenv.load();
-		System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
-		System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
-		System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
-		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
-		SpringApplication.run(DormBotApplication.class, args);
+
+		Properties props = new Properties();
+		props.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
+		props.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));
+		props.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
+		props.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+
+		SpringApplication app = new SpringApplication(DormBotApplication.class);
+		app.setDefaultProperties(props);
+		app.run(args);
 	}
 }
 
@@ -32,3 +38,5 @@ public class DormBotApplication {
 // bug if there is interception between methods
 // tests
 // disload main class
+
+// проверить не надо ли application.yaml перенести в корень
