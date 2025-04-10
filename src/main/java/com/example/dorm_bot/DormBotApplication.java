@@ -18,7 +18,7 @@ import java.util.Properties;
 public class DormBotApplication {
 
 	@Value("${spring.datasource.url}")
-	private String url;
+	private static String url;
 
 	public static void main(String[] args) {
 		Dotenv dotenv = Dotenv.load();
