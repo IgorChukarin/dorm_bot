@@ -1,6 +1,7 @@
 package com.example.dorm_bot;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,9 @@ import java.util.Properties;
 @SpringBootApplication
 public class DormBotApplication {
 
+	@Value("${spring.datasource.url}")
+	private String url;
+
 	public static void main(String[] args) {
 		Dotenv dotenv = Dotenv.load();
 
@@ -26,6 +30,8 @@ public class DormBotApplication {
 		props.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
 
 		SpringApplication app = new SpringApplication(DormBotApplication.class);
+
+		System.out.println(url);
 		app.setDefaultProperties(props);
 		app.run(args);
 	}
