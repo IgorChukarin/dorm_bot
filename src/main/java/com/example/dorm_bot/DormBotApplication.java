@@ -32,7 +32,6 @@ public class DormBotApplication {
 		properties.put("spring.datasource.password", System.getenv("DB_PASSWORD"));
 		app.setDefaultProperties(properties);
 
-
 		app.run(args);
 	}
 }

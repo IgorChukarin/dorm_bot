@@ -12,7 +12,7 @@ public class CleaningRepository {
     private final String bucket = "\uD83E\uDEA3";
     private final String sponge = "\uD83E\uDDFD";
 
-    private final List<String> NAMES = new ArrayList<>(List.of("Pierpaolo", "Igor", "Kasra", "Arvin", "Andrea"));
+    private final List<String> NAMES = new ArrayList<>(List.of("Andrea", "Pierpaolo", "Igor", "Kasra", "Arvin"));
     private static final List<int[]> PAIRS = List.of(
             new int[]{0, 1},
             new int[]{2, 3},
